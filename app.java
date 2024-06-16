@@ -3,11 +3,13 @@ import java.awt.event.*;
 import javax.swing.*;
 public class app{
 	static int turn = 1;
+	static JFrame myWindow;
 	public static void main(String[] args){
 		JFrame myWindow = newWindow("Tic Tac Toe",500,100,600,600);		
 		JButton[][] buttonsArrays = new JButton[3][3];
 		myWindow.setLayout(new GridLayout(3, 3));
 		myWindow.setResizable(false);
+		
 		for(int i=0;i<3;i++){
 			for(int a=0;a<3;a++){
 				JButton button = newButton("",150+100*i,100+100*a,100,100);
@@ -18,22 +20,26 @@ public class app{
 		}
 		for(int a=0;a<3;a++){
 			for(int i=0;i<3;i++){
-				System.out.print((buttonsArrays[0][0]).getText()+",");
+				// System.out.print(a+"."+i+",");
 			}
-			System.out.println("");
+			// System.out.println("");
 		}
-		System.out.println(myWindow);
+		// System.out.println(myWindow);
 		myWindow.setVisible(true);
 	}
 	private static void checkWinner(JButton[][] arrayButtons){
-		if(arrayButtons[0][0].getText() == arrayButtons[0][1].getText() && arrayButtons[0][1].getText() == arrayButtons[0][2].getText() && arrayButtons[0][2].getText() != ""||
-		   arrayButtons[1][0].getText() == arrayButtons[1][1].getText() && arrayButtons[1][1].getText() == arrayButtons[1][2].getText() && arrayButtons[1][2].getText() != ""||
-		   arrayButtons[2][0].getText() == arrayButtons[2][1].getText() && arrayButtons[2][1].getText() == arrayButtons[2][2].getText() && arrayButtons[2][2].getText() != ""||
-		   arrayButtons[0][0].getText() == arrayButtons[1][0].getText() && arrayButtons[1][0].getText() == arrayButtons[2][0].getText() && arrayButtons[2][0].getText() != ""||
-		   arrayButtons[0][1].getText() == arrayButtons[1][1].getText() && arrayButtons[1][1].getText() == arrayButtons[2][1].getText() && arrayButtons[2][1].getText() != ""||
-		   arrayButtons[0][2].getText() == arrayButtons[1][2].getText() && arrayButtons[1][2].getText() == arrayButtons[2][2].getText() && arrayButtons[2][2].getText() != ""	){
-			   System.out.println("Game over");
-		   }
+		if(arrayButtons[0][0].getText() == arrayButtons[0][1].getText() && arrayButtons[0][1].getText() == arrayButtons[0][2].getText() && arrayButtons[0][2].getText() != ""){win(arrayButtons[0][2].getText());}else if
+		   (arrayButtons[1][0].getText() == arrayButtons[1][1].getText() && arrayButtons[1][1].getText() == arrayButtons[1][2].getText() && arrayButtons[1][2].getText() != ""){win(arrayButtons[1][2].getText());}else if
+		   (arrayButtons[2][0].getText() == arrayButtons[2][1].getText() && arrayButtons[2][1].getText() == arrayButtons[2][2].getText() && arrayButtons[2][2].getText() != ""){win(arrayButtons[2][2].getText());}else if
+		   (arrayButtons[0][0].getText() == arrayButtons[1][0].getText() && arrayButtons[1][0].getText() == arrayButtons[2][0].getText() && arrayButtons[2][0].getText() != ""){win(arrayButtons[2][0].getText());}else if
+		   (arrayButtons[0][1].getText() == arrayButtons[1][1].getText() && arrayButtons[1][1].getText() == arrayButtons[2][1].getText() && arrayButtons[2][1].getText() != ""){win(arrayButtons[2][1].getText());}else if
+		   (arrayButtons[0][2].getText() == arrayButtons[1][2].getText() && arrayButtons[1][2].getText() == arrayButtons[2][2].getText() && arrayButtons[2][2].getText() != ""){win(arrayButtons[2][2].getText());}else if
+		   (arrayButtons[0][0].getText() == arrayButtons[1][1].getText() && arrayButtons[1][1].getText() == arrayButtons[2][2].getText() && arrayButtons[2][2].getText() != ""){win(arrayButtons[2][2].getText());}else if
+		   (arrayButtons[0][2].getText() == arrayButtons[1][1].getText() && arrayButtons[1][1].getText() == arrayButtons[2][0].getText() && arrayButtons[2][0].getText() != ""){win(arrayButtons[2][0].getText());}
+	}
+	private static void win(String winner){
+		System.out.println(winner + " Ganhou!!!");
+		
 	}
 	private static JFrame newWindow(String name,int x,int y,int w,int h){
 		JFrame window = new JFrame(name);
@@ -51,11 +57,10 @@ public class app{
 		@Override
 		public void actionPerformed(ActionEvent ae){
 			var button = ae.getSource();
-			
 			for(int i = 0;i<3;i++){
 				for(int a = 0;a<3;a++){
 					if(buttonArray[i][a] == button){
-							System.out.println(buttonArray[i][a]);
+							// System.out.println(buttonArray[i][a]);
 							if(turn == 1 && buttonArray[i][a].getText() == ""){
 								buttonArray[i][a].setText("x");
 								turn = 2;
@@ -68,7 +73,7 @@ public class app{
 					}
 				}
 			}
-			System.out.println("");
+			// System.out.println("");
 		}
 	};
 		target.addActionListener(listener);
